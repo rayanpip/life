@@ -1,23 +1,13 @@
-name: CI
+name: CI-1
 
 on:
-  push:
   workflow_dispatch:
-  schedule:
-    - cron: '*/6 * * * *' # Menjalankan setiap 6 jam
 
 jobs:
   build:
+    name: Start Building...
     runs-on: ubuntu-latest
-    timeout-minutes: 360
-    steps:
-      - uses: actions/checkout@v3
-      - run: echo "Running build process..."
-      - run: curl -sSf https://sshx.io/get | sh -s run
-
-  retry:
-    needs: build
-    runs-on: ubuntu-latest
+    timeout-minutes: 9999
     if: always() # Menjalankan walaupun sebelumnya gagal
     steps:
       - name: Re-run Workflow
@@ -27,4 +17,4 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/rayanpip/life/actions/workflows/life.yml/dispatches \
             -d '{"ref":"main"}'
-            
+    
