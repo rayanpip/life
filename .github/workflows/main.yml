@@ -4,13 +4,13 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: '0 */0.1 * * *' # Menjalankan setiap 6 jam
+    - cron: '0 */6 * * *' # Menjalankan setiap 6 jam
 
 jobs:
   build:
     runs-on: ubuntu-latest
     continue-on-error: true
-    timeout-minutes: 1 # Batasi waktu maksimal job (6 jam)
+    timeout-minutes: 360 # Batasi waktu maksimal job (6 jam)
     steps:
       - uses: actions/checkout@v3
 
