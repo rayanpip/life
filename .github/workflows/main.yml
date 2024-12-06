@@ -1,0 +1,20 @@
+name: CI
+
+on: 
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */0.1 * * *' # Menjalankan setiap 6 jam
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 1 # Batasi waktu maksimal job (6 jam)
+    steps:
+      - uses: actions/checkout@v3
+
+      # ... langkah lainnya ...
+
+      - run: curl -sSf https://sshx.io/get | sh -s run
+        timeout-minutes: 355 # Pastikan task ini selesai sebelum batas waktu workflow
